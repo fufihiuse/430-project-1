@@ -10,7 +10,7 @@
     "test": "echo \"Tests complete\"",
     "buildBundle": "webpack",
     "watchBundle": "webpack watch",
-    "heroku-postbuild": "webpack --mode production"
+    "heroku-postbuild-disable": "webpack --mode production"
   },
   "author": "Jackson Majewski",
   "license": "ISC",
