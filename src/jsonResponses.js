@@ -53,9 +53,19 @@ const getAllBooks = (request, response) => {
   return respond(request, response, JSON.stringify(responseJson), 200);
 };
 
+// Get all books by author
+
 const getBooksByAuthor = (request, response) => {
   const protocol = request.connection.encrypted ? 'https' : 'http';
   const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('author')) {
+    const jsonResponse = {
+      message: 'Missing query param for author!',
+      id: 'getBooksByAuthorMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
 
   const authorName = parsedUrl.searchParams.get('author');
 
@@ -63,7 +73,28 @@ const getBooksByAuthor = (request, response) => {
     (book) => book.author === authorName,
   );
 
-  console.log(bookList);
+  return respond(request, response, JSON.stringify(bookList), 200);
+};
+
+// Get specific book from author and title
+const getBook = (request, response) => {
+  const protocol = request.connection.encrypted ? 'https' : 'http';
+  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('author') || !parsedUrl.searchParams.has('title')) {
+    const jsonResponse = {
+      message: 'Missing query params for either title or author!',
+      id: 'getBookMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
+
+  const authorName = parsedUrl.searchParams.get('author');
+  const bookTitle = parsedUrl.searchParams.get('title');
+
+  const bookList = books.filter(
+    (book) => book.author === authorName && book.title === bookTitle,
+  );
 
   return respond(request, response, JSON.stringify(bookList), 200);
 };
@@ -119,4 +150,5 @@ module.exports = {
   addBook,
   getAllBooks,
   getBooksByAuthor,
+  getBook,
 };

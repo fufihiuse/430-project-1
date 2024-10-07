@@ -12,6 +12,7 @@ const urlStruct = {
   '/addBook': jsonHandler.addBook,
   '/getAllBooks': jsonHandler.getAllBooks,
   '/getBooksByAuthor': jsonHandler.getBooksByAuthor,
+  '/getBook': jsonHandler.getBook,
   index: htmlHandler.getIndex,
   notFound: jsonHandler.notFound,
 };
