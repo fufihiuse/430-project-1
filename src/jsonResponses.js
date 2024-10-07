@@ -170,6 +170,51 @@ const addBook = (request, response) => {
   return respond(request, response, '', status);
 };
 
+// adds a rating to a book
+const addBookRating = (request, response) => {
+  const responseJSON = {
+    message: 'Requires author, title, and rating.',
+  };
+
+  const {
+    author, title,
+  } = request.body;
+
+  const rating = Number(request.body.rating);
+
+  if (!(author && title && rating)
+    || !Number.isInteger(rating)) {
+    responseJSON.id = 'missingParams';
+    return respond(request, response, JSON.stringify(responseJSON), 400);
+  }
+
+  let status = 200;
+
+  if (!(books.find((book) => book.title === title)
+     && books.find((book) => book.author === author))) {
+    responseJSON.message = 'Unable to find book!';
+    responseJSON.id = 'addBookRatingNotFound';
+
+    status = 400;
+
+    const responseString = JSON.stringify(responseJSON);
+    return respond(request, response, responseString, status);
+  }
+
+  const bookList = books.filter(
+    (book) => book.author === author && book.title === title,
+  );
+
+  if (status === 200) {
+    bookList[0].rating = rating;
+
+    responseJSON.message = 'Rating added successfully!';
+    return respond(request, response, JSON.stringify(responseJSON), status);
+  }
+
+  return respond(request, response, '', status);
+};
+
 module.exports = {
   notFound,
   badRequest,
@@ -178,4 +223,5 @@ module.exports = {
   getBooksByAuthor,
   getBook,
   getBooksByYear,
+  addBookRating,
 };
