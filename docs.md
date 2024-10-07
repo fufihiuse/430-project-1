@@ -1,8 +1,8 @@
 # Endpoints:
 
-## addBook
-- type: POST
-- body:
+## /addBook
+- method: POST
+- body params (all required):
     - author
     - country
     - language
@@ -12,22 +12,30 @@
     - year
     - genre
 
-## getAllBooks
-- type: GET
-- params: none
+## /addBookRating
+- method: POST
+- body params (all required):
+    - author
+    - title
+    - rating
 
-### getBooksByAuthor
-- type: GET
-- params: 
+## /getAllBooks
+- method: GET
+- query params: 
+    - N/A
+
+### /getBooksByAuthor
+- method: GET
+- query params (all required): 
     - author
 
-## getBooksByYear
-- type: GET
-- params:
+## /getBooksByYear
+- method: GET
+- query params (all required):
     - year
 
-### getBook
-- type: GET
-- params:
+### /getBook
+- method: GET
+- query params (all required):
     - author
     - title
