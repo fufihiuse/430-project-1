@@ -1,0 +1,24 @@
+{
+  "name": "http-api-assignment-ii",
+  "version": "1.0.0",
+  "description": "API Assignment 2",
+  "main": "server.js",
+  "scripts": {
+    "nodemon": "nodemon -e js,html,css --watch ./src --watch ./hosted ./src/server.js",
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\"",
+    "buildBundle": "webpack",
+    "watchBundle": "webpack watch",
+    "heroku-postbuild": "webpack --mode production"
+  },
+  "author": "Jackson Majewski",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.30.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
