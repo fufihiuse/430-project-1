@@ -54,7 +54,6 @@ const getAllBooks = (request, response) => {
 };
 
 // Get all books by author
-
 const getBooksByAuthor = (request, response) => {
   const protocol = request.connection.encrypted ? 'https' : 'http';
   const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
@@ -71,6 +70,29 @@ const getBooksByAuthor = (request, response) => {
 
   const bookList = books.filter(
     (book) => book.author === authorName,
+  );
+
+  return respond(request, response, JSON.stringify(bookList), 200);
+};
+
+// get all books from a specific year
+const getBooksByYear = (request, response) => {
+  const protocol = request.connection.encrypted ? 'https' : 'http';
+  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('year')
+    || !Number.isInteger(Number(parsedUrl.searchParams.get('year')))) {
+    const jsonResponse = {
+      message: 'Missing query param for year!',
+      id: 'getBooksByYearMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
+
+  const year = Number(parsedUrl.searchParams.get('year'));
+
+  const bookList = books.filter(
+    (book) => book.year === year,
   );
 
   return respond(request, response, JSON.stringify(bookList), 200);
@@ -106,10 +128,14 @@ const addBook = (request, response) => {
   };
 
   const {
-    author, country, language, link, pages, title, year, genre,
+    author, country, language, link, title, genre,
   } = request.body;
 
-  if (!(author && country && language && link && pages && title && year && genre)) {
+  const year = Number(request.body.year);
+  const pages = Number(request.body.pages);
+
+  if (!(author && country && language && link && pages && title && year && genre)
+    || !Number.isInteger(year) || !Number.isInteger(pages)) {
     responseJSON.id = 'missingParams';
     return respond(request, response, JSON.stringify(responseJSON), 400);
   }
@@ -151,4 +177,5 @@ module.exports = {
   getAllBooks,
   getBooksByAuthor,
   getBook,
+  getBooksByYear,
 };

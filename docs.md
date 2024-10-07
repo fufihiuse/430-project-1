@@ -22,7 +22,9 @@
     - author
 
 ## getBooksByYear
-
+- type: GET
+- params:
+    - year
 
 ### getBook
 - type: GET
