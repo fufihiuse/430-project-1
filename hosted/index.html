@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book API</title>
+    <title>Book API Documentation</title>
 </head>
+
 <body>
-    <h1>BOOK API</h1>
+    <h1>Endpoint Documentation:</h1>
+    <h2>/addBook</h2>
+    <ul>
+        <li>method: POST</li>
+        <li>body params (all required):<ul>
+                <li>author</li>
+                <li>country</li>
+                <li>language</li>
+                <li>link</li>
+                <li>pages</li>
+                <li>title</li>
+                <li>year</li>
+                <li>genre</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>/addBookRating</h2>
+    <ul>
+        <li>method: POST</li>
+        <li>body params (all required):<ul>
+                <li>author</li>
+                <li>title</li>
+                <li>rating</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>/getAllBooks</h2>
+    <ul>
+        <li>method: GET</li>
+        <li>query params: <ul>
+                <li>N/A</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>/getBooksByAuthor</h2>
+    <ul>
+        <li>method: GET</li>
+        <li>query params (all required): <ul>
+                <li>author</li>
+            </ul>
+        </li>
+    </ul>
+    <h2 id="-getbooksbyyear">/getBooksByYear</h2>
+    <ul>
+        <li>method: GET</li>
+        <li>query params (all required):<ul>
+                <li>year</li>
+            </ul>
+        </li>
+    </ul>
+    <h3 id="-getbook">/getBook</h3>
+    <ul>
+        <li>method: GET</li>
+        <li>query params (all required):<ul>
+                <li>author</li>
+                <li>title</li>
+            </ul>
+        </li>
+    </ul>
+
 </body>
+
 </html>
