@@ -53,9 +53,18 @@ const getAllBooks = (request, response) => {
   return respond(request, response, JSON.stringify(responseJson), 200);
 };
 
+// Get all books by author
 const getBooksByAuthor = (request, response) => {
   const protocol = request.connection.encrypted ? 'https' : 'http';
   const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('author')) {
+    const jsonResponse = {
+      message: 'Missing query param for author!',
+      id: 'getBooksByAuthorMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
 
   const authorName = parsedUrl.searchParams.get('author');
 
@@ -63,7 +72,51 @@ const getBooksByAuthor = (request, response) => {
     (book) => book.author === authorName,
   );
 
-  console.log(bookList);
+  return respond(request, response, JSON.stringify(bookList), 200);
+};
+
+// get all books from a specific year
+const getBooksByYear = (request, response) => {
+  const protocol = request.connection.encrypted ? 'https' : 'http';
+  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('year')
+    || !Number.isInteger(Number(parsedUrl.searchParams.get('year')))) {
+    const jsonResponse = {
+      message: 'Missing query param for year!',
+      id: 'getBooksByYearMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
+
+  const year = Number(parsedUrl.searchParams.get('year'));
+
+  const bookList = books.filter(
+    (book) => book.year === year,
+  );
+
+  return respond(request, response, JSON.stringify(bookList), 200);
+};
+
+// Get specific book from author and title
+const getBook = (request, response) => {
+  const protocol = request.connection.encrypted ? 'https' : 'http';
+  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
+
+  if (!parsedUrl.searchParams.has('author') || !parsedUrl.searchParams.has('title')) {
+    const jsonResponse = {
+      message: 'Missing query params for either title or author!',
+      id: 'getBookMissingParams',
+    };
+    return respond(request, response, JSON.stringify(jsonResponse), 400);
+  }
+
+  const authorName = parsedUrl.searchParams.get('author');
+  const bookTitle = parsedUrl.searchParams.get('title');
+
+  const bookList = books.filter(
+    (book) => book.author === authorName && book.title === bookTitle,
+  );
 
   return respond(request, response, JSON.stringify(bookList), 200);
 };
@@ -75,10 +128,14 @@ const addBook = (request, response) => {
   };
 
   const {
-    author, country, language, link, pages, title, year, genre,
+    author, country, language, link, title, genre,
   } = request.body;
 
-  if (!(author && country && language && link && pages && title && year && genre)) {
+  const year = Number(request.body.year);
+  const pages = Number(request.body.pages);
+
+  if (!(author && country && language && link && pages && title && year && genre)
+    || !Number.isInteger(year) || !Number.isInteger(pages)) {
     responseJSON.id = 'missingParams';
     return respond(request, response, JSON.stringify(responseJSON), 400);
   }
@@ -113,10 +170,58 @@ const addBook = (request, response) => {
   return respond(request, response, '', status);
 };
 
+// adds a rating to a book
+const addBookRating = (request, response) => {
+  const responseJSON = {
+    message: 'Requires author, title, and rating.',
+  };
+
+  const {
+    author, title,
+  } = request.body;
+
+  const rating = Number(request.body.rating);
+
+  if (!(author && title && rating)
+    || !Number.isInteger(rating)) {
+    responseJSON.id = 'missingParams';
+    return respond(request, response, JSON.stringify(responseJSON), 400);
+  }
+
+  let status = 200;
+
+  if (!(books.find((book) => book.title === title)
+     && books.find((book) => book.author === author))) {
+    responseJSON.message = 'Unable to find book!';
+    responseJSON.id = 'addBookRatingNotFound';
+
+    status = 400;
+
+    const responseString = JSON.stringify(responseJSON);
+    return respond(request, response, responseString, status);
+  }
+
+  const bookList = books.filter(
+    (book) => book.author === author && book.title === title,
+  );
+
+  if (status === 200) {
+    bookList[0].rating = rating;
+
+    responseJSON.message = 'Rating added successfully!';
+    return respond(request, response, JSON.stringify(responseJSON), status);
+  }
+
+  return respond(request, response, '', status);
+};
+
 module.exports = {
   notFound,
   badRequest,
   addBook,
   getAllBooks,
   getBooksByAuthor,
+  getBook,
+  getBooksByYear,
+  addBookRating,
 };
