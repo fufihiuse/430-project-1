@@ -554,6 +554,10 @@ video {
   display: none;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .list-inside {
   list-style-position: inside;
 }
@@ -562,6 +566,31 @@ video {
   list-style-type: disc;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .indent-4 {
   text-indent: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
