@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <title>Book API Documentation</title>
+</head>
+
+<body>
+    <h1>Endpoint Documentation:</h1>
+    <div id="addBook">
+        <h2>/addBook</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: POST</li>
+            <li>body params (all required):<ul class="list-disc list-inside indent-4">
+                    <li>author</li>
+                    <li>country</li>
+                    <li>language</li>
+                    <li>link</li>
+                    <li>pages</li>
+                    <li>title</li>
+                    <li>year</li>
+                    <li>genre</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="addBookRating">
+        <h2>/addBookRating</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: POST</li>
+            <li>body params (all required):<ul class="list-disc list-inside indent-4">
+                    <li>author</li>
+                    <li>title</li>
+                    <li>rating</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="getAllBooks">
+        <h2>/getAllBooks</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params: <ul class="list-disc list-inside indent-4">
+                    <li>N/A</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBooksByAuthor">
+        <h2>/getBooksByAuthor</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params (all required): <ul class="list-disc list-inside indent-4">
+                    <li>author</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBooksByYear">
+        <h2>/getBooksByYear</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params (all required):<ul class="list-disc list-inside indent-4">
+                    <li>year</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBook">
+        <h2>/getBook</h3>
+            <ul class="list-disc list-inside indent-4">
+                <li>method: GET</li>
+                <li>query params (all required):<ul class="list-disc list-inside indent-4">
+                        <li>author</li>
+                        <li>title</li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+
+</body>
+
+</html>

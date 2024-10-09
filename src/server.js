@@ -9,6 +9,8 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const urlStruct = {
 
   '/': htmlHandler.getIndex,
+  '/documentation': htmlHandler.getDocs,
+  '/style.css': htmlHandler.getCSS,
   '/addBook': jsonHandler.addBook,
   '/getAllBooks': jsonHandler.getAllBooks,
   '/getBooksByAuthor': jsonHandler.getBooksByAuthor,
@@ -40,15 +42,15 @@ const parseBody = (request, response, handler) => {
   });
 };
 
-const handlePost = (request, response, parsedURL) => {
-  const handler = urlStruct[parsedURL.pathname];
+const handlePost = (request, response) => {
+  const handler = urlStruct[request.parsedURL.pathname];
   if (handler) {
     parseBody(request, response, handler);
   }
 };
 
-const handleGet = (request, response, parsedURL) => {
-  const handler = urlStruct[parsedURL.pathname];
+const handleGet = (request, response) => {
+  const handler = urlStruct[request.parsedURL.pathname];
 
   if (handler) {
     handler(request, response);
@@ -60,11 +62,13 @@ const handleGet = (request, response, parsedURL) => {
 const onRequest = (request, response) => {
   const protocol = request.connection.encrypted ? 'https' : 'http';
   const parsedURL = new URL(request.url, `${protocol}://${request.headers.host}`);
+  request.parsedURL = parsedURL;
+  request.query = parsedURL.searchParams;
 
   if (request.method === 'POST') {
-    handlePost(request, response, parsedURL);
+    handlePost(request, response);
   } else {
-    handleGet(request, response, parsedURL);
+    handleGet(request, response);
   }
 };
 
