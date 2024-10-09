@@ -196,7 +196,6 @@ const addBookRating = (request, response) => {
 
 module.exports = {
   notFound,
-  badRequest,
   addBook,
   getAllBooks,
   getBooksByAuthor,
