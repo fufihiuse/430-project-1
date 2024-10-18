@@ -11,6 +11,7 @@ const urlStruct = {
   '/': htmlHandler.getIndex,
   '/docs': htmlHandler.getDocs,
   '/style.css': htmlHandler.getCSS,
+  '/bundle.js': htmlHandler.getJS,
   '/addBook': jsonHandler.addBook,
   '/getAllBooks': jsonHandler.getAllBooks,
   '/getBooksByAuthor': jsonHandler.getBooksByAuthor,
