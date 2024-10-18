@@ -1,12 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./style.css" rel="stylesheet">
     <title>Book API</title>
 </head>
-<body>
-    
+
+<body class="bg-slate-600">
+    <div class="grid grid-cols-2">
+        <!-- Add Book -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-2 max-w-xl" id="addBook"
+            action="/addBook" method="POST">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Add Book</h2>
+            <div>
+                <label class="block text-sm" for="title">Title: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="titleField" type="text" name="title" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="author">Author: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="authorField" type="text" name="author" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="year">Year: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="yearField" type="number" name="year" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="genre">Genre: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="genreField" type="text" name="genre" />
+            </div>
+
+            <div>
+                <label class="block text-sm" class="block text-sm" for="country">Country: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="countryField" type="text" name="country" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="language">Language: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="languageField" type="text" name="language" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="link">Link: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="linkField" type="text" name="link" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="pages">Pages: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="pagesField" type="number" name="pages" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Submit Book" />
+        </form>
+    </div>
 </body>
+
 </html>
