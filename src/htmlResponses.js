@@ -24,7 +24,7 @@ const getCSS = (request, response) => {
 };
 
 const getJS = (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/css' });
+  response.writeHead(200, { 'Content-Type': 'application/json' });
   response.write(js);
   response.end();
 };

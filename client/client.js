@@ -39,23 +39,23 @@ const sendReq = async (userForm) => {
     const method = userForm.getAttribute('method');
 
     const formObject = {
-        title: userForm.querySelector('#titleField').value,
-        author: userForm.querySelector('#authorField').value,
-        year: userForm.querySelector('#yearField').value,
-        genre: userForm.querySelector('#genreField').value,
-        country: userForm.querySelector('#countryField').value,
-        language: userForm.querySelector('#languageField').value,
-        link: userForm.querySelector('#linkField').value,
-        pages: userForm.querySelector('#pagesField').value,
-        rating: userForm.querySelector('#ratingField').value,
+        title: userForm.querySelector('#titleField'),
+        author: userForm.querySelector('#authorField'),
+        year: userForm.querySelector('#yearField'),
+        genre: userForm.querySelector('#genreField'),
+        country: userForm.querySelector('#countryField'),
+        language: userForm.querySelector('#languageField'),
+        link: userForm.querySelector('#linkField'),
+        pages: userForm.querySelector('#pagesField'),
+        rating: userForm.querySelector('#ratingField'),
     };
 
     for (let obj in formObject) {
         if (obj) {
-            console.log(obj, formObject[obj]);
+            console.log(obj, formObject[obj].value);
         }
         else {
-            console.log("Null!")
+            console.log('Null!');
         }
     }
     return
@@ -69,10 +69,12 @@ const sendReq = async (userForm) => {
         },
     };
 
-
-
-    if (nameMethod.toUpperCase() === 'POST') {
-        const formData = `name=${name.value}&age=${age.value}`;
+    if (action === '/addBook') {
+        const formData = `title=${title.value}&author=${author.value}&year=${year.value}&genre=${genre.value}&country=${country.value}&language=${language.value}&link=${link.value}&pages=${pages.value}`;
+        req.body = formData;
+    }
+    else if (action === '/addBookRating') {
+        const formData = `title=${title.value}&author=${author.value}&rating=${rating.value}`;
         req.body = formData;
     }
 
