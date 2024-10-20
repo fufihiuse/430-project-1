@@ -45,8 +45,8 @@ const sendReq = async (bookForm) => {
 
         let queryParams = "?"
         for (obj in formObject) {
-            if (formObject[obj]) {
-                queryParams += `${obj}=${formObject[obj].value}&`;
+            if (formObject[obj] && formObject[obj].value !== '') {
+                queryParams += `${obj}=${formObject[obj].value.trim()}&`;
             }
         }
         queryParams = queryParams.slice(0, queryParams.length - 1);
