@@ -34,18 +34,6 @@ const notFound = (request, response) => {
   return respond(request, response, responseString, status);
 };
 
-// Returns a 404 when the request is invalid
-const badRequest = (request, response) => {
-  const responseObj = {
-    message: 'Bad Request!',
-    id: 'badRequest',
-  };
-  const status = 400;
-
-  const responseString = JSON.stringify(responseObj);
-  return respond(request, response, responseString, status);
-};
-
 // Returns a list of the books
 const getAllBooks = (request, response) => {
   const responseJson = books;
@@ -55,10 +43,7 @@ const getAllBooks = (request, response) => {
 
 // Get all books by author
 const getBooksByAuthor = (request, response) => {
-  const protocol = request.connection.encrypted ? 'https' : 'http';
-  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
-
-  if (!parsedUrl.searchParams.has('author')) {
+  if (!request.query.has('author')) {
     const jsonResponse = {
       message: 'Missing query param for author!',
       id: 'getBooksByAuthorMissingParams',
@@ -66,7 +51,7 @@ const getBooksByAuthor = (request, response) => {
     return respond(request, response, JSON.stringify(jsonResponse), 400);
   }
 
-  const authorName = parsedUrl.searchParams.get('author');
+  const authorName = request.query.get('author');
 
   const bookList = books.filter(
     (book) => book.author === authorName,
@@ -77,11 +62,8 @@ const getBooksByAuthor = (request, response) => {
 
 // get all books from a specific year
 const getBooksByYear = (request, response) => {
-  const protocol = request.connection.encrypted ? 'https' : 'http';
-  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
-
-  if (!parsedUrl.searchParams.has('year')
-    || !Number.isInteger(Number(parsedUrl.searchParams.get('year')))) {
+  if (!request.query.has('year')
+    || !Number.isInteger(Number(request.query.get('year')))) {
     const jsonResponse = {
       message: 'Missing query param for year!',
       id: 'getBooksByYearMissingParams',
@@ -89,7 +71,7 @@ const getBooksByYear = (request, response) => {
     return respond(request, response, JSON.stringify(jsonResponse), 400);
   }
 
-  const year = Number(parsedUrl.searchParams.get('year'));
+  const year = Number(request.query.get('year'));
 
   const bookList = books.filter(
     (book) => book.year === year,
@@ -100,10 +82,7 @@ const getBooksByYear = (request, response) => {
 
 // Get specific book from author and title
 const getBook = (request, response) => {
-  const protocol = request.connection.encrypted ? 'https' : 'http';
-  const parsedUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
-
-  if (!parsedUrl.searchParams.has('author') || !parsedUrl.searchParams.has('title')) {
+  if (!request.query.has('author') || !request.query.has('title')) {
     const jsonResponse = {
       message: 'Missing query params for either title or author!',
       id: 'getBookMissingParams',
@@ -111,8 +90,8 @@ const getBook = (request, response) => {
     return respond(request, response, JSON.stringify(jsonResponse), 400);
   }
 
-  const authorName = parsedUrl.searchParams.get('author');
-  const bookTitle = parsedUrl.searchParams.get('title');
+  const authorName = request.query.get('author');
+  const bookTitle = request.query.get('title');
 
   const bookList = books.filter(
     (book) => book.author === authorName && book.title === bookTitle,
@@ -163,7 +142,7 @@ const addBook = (request, response) => {
   }
 
   if (status === 201) {
-    responseJSON.message = 'User Created Successfully!';
+    responseJSON.message = 'Book Created Successfully!';
     return respond(request, response, JSON.stringify(responseJSON), status);
   }
 
@@ -217,7 +196,6 @@ const addBookRating = (request, response) => {
 
 module.exports = {
   notFound,
-  badRequest,
   addBook,
   getAllBooks,
   getBooksByAuthor,

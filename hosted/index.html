@@ -4,70 +4,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book API Documentation</title>
+    <link href="./style.css" rel="stylesheet">
+    <title>Book API</title>
+    <script src="/bundle.js"></script>
 </head>
 
-<body>
-    <h1>Endpoint Documentation:</h1>
-    <h2>/addBook</h2>
-    <ul>
-        <li>method: POST</li>
-        <li>body params (all required):<ul>
-                <li>author</li>
-                <li>country</li>
-                <li>language</li>
-                <li>link</li>
-                <li>pages</li>
-                <li>title</li>
-                <li>year</li>
-                <li>genre</li>
-            </ul>
-        </li>
-    </ul>
-    <h2>/addBookRating</h2>
-    <ul>
-        <li>method: POST</li>
-        <li>body params (all required):<ul>
-                <li>author</li>
-                <li>title</li>
-                <li>rating</li>
-            </ul>
-        </li>
-    </ul>
-    <h2>/getAllBooks</h2>
-    <ul>
-        <li>method: GET</li>
-        <li>query params: <ul>
-                <li>N/A</li>
-            </ul>
-        </li>
-    </ul>
-    <h2>/getBooksByAuthor</h2>
-    <ul>
-        <li>method: GET</li>
-        <li>query params (all required): <ul>
-                <li>author</li>
-            </ul>
-        </li>
-    </ul>
-    <h2 id="-getbooksbyyear">/getBooksByYear</h2>
-    <ul>
-        <li>method: GET</li>
-        <li>query params (all required):<ul>
-                <li>year</li>
-            </ul>
-        </li>
-    </ul>
-    <h3 id="-getbook">/getBook</h3>
-    <ul>
-        <li>method: GET</li>
-        <li>query params (all required):<ul>
-                <li>author</li>
-                <li>title</li>
-            </ul>
-        </li>
-    </ul>
+<body class="bg-slate-600">
+    <h1 class="font-bold text-4xl text-center block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl">Book API</h1>
+    <div>
+        <!-- Add Book -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="addBook"
+            action="/addBook" method="POST">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Add Book</h2>
+            <div>
+                <label class="block text-sm" for="title">Title: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="titleField" type="text" name="title" />
+            </div>
 
+            <div>
+                <label class="block text-sm" for="author">Author: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="authorField" type="text" name="author" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="year">Year: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="yearField" type="number" name="year" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="genre">Genre: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="genreField" type="text" name="genre" />
+            </div>
+
+            <div>
+                <label class="block text-sm" class="block text-sm" for="country">Country: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="countryField" type="text" name="country" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="language">Language: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="languageField" type="text" name="language" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="link">Link: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="linkField" type="text" name="link" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="pages">Pages: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="pagesField" type="number" name="pages" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Submit Book" />
+        </form>
+
+        <!-- Add Rating -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="addBookRating"
+            action="/addBookRating" method="POST">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Add Book Rating</h2>
+            <div>
+                <label class="block text-sm" for="title">Title: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="titleField" type="text" name="title" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="author">Author: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="authorField" type="text" name="author" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="rating">Rating: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="ratingField" type="number" name="rating" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Submit Rating" />
+        </form>
+
+        <!-- Get All Books -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="getAllBooks"
+            action="/getAllBooks" method="GET">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Get All Books</h2>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Submit Book" />
+        </form>
+
+        <!-- Get Book -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="getBook"
+            action="/getBook" method="GET">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Get Book</h2>
+
+            <div>
+                <label class="block text-sm" for="title">Title: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="titleField" type="text" name="title" />
+            </div>
+
+            <div>
+                <label class="block text-sm" for="author">Author: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="authorField" type="text" name="author" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Get Book" />
+        </form>
+
+        <!-- Get Books by Author -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="getBooksByAuthor"
+            action="/getBooksByAuthor" method="GET">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Get Books by Author</h2>
+
+            <div>
+                <label class="block text-sm" for="author">Author: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="authorField" type="text" name="author" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Get Books" />
+        </form>
+
+        <!-- Get Books by Year -->
+        <form class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl" id="getBooksByYear"
+            action="/getBooksByYear" method="GET">
+            <h2 class="text-2xl font-bold my-1.5 text-center">Get Books by Year</h2>
+
+            <div>
+                <label class="block text-sm" for="year">Year: </label>
+                <input
+                    class="rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-full bg-slate-100"
+                    id="yearField" type="number" name="year" />
+            </div>
+
+            <input
+                class="block rounded-md shadow-sm ring-1 ring-inset ring-slate-500 focus-within:ring-2 py-1.5 pl-1 w-1/2 my-4 mx-auto bg-slate-100"
+                type="submit" value="Get Books" />
+        </form>
+    </div>
+    <div class="absolute top-5 right-5 ring-4 ring-slate-700 w-1/2 rounded-md py-3 bg-slate-100 px-3 min-h-xl">
+        <h2 class="text-2xl font-bold my-1.5 text-center">Output</h2>
+        <p id="output" class="bg-slate-200 rounded-md px-2 text-slate-800 text-lg font-mono break-words text-pretty"></p>
+    </div>
 </body>
 
 </html>

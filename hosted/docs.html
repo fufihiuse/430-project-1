@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <title>Book API Documentation</title>
+</head>
+
+<body class="bg-slate-600">
+    <h1
+        class="font-bold text-4xl text-center block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl">
+        Endpoint Documentation:</h1>
+    <div id="addBook" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/addBook</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: POST</li>
+            <li>body params (all required):<ul class="list-disc list-inside indent-8">
+                    <li>author</li>
+                    <li>country</li>
+                    <li>language</li>
+                    <li>link</li>
+                    <li>pages</li>
+                    <li>title</li>
+                    <li>year</li>
+                    <li>genre</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="addBookRating" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/addBookRating</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: POST</li>
+            <li>body params (all required):<ul class="list-disc list-inside indent-8">
+                    <li>author</li>
+                    <li>title</li>
+                    <li>rating</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="getAllBooks" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/getAllBooks</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params:<ul class="list-disc list-inside indent-8">
+                    <li>N/A</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBooksByAuthor" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/getBooksByAuthor</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params (all required):<ul class="list-disc list-inside indent-8">
+                    <li>author</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBooksByYear" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/getBooksByYear</h2>
+        <ul class="list-disc list-inside indent-4">
+            <li>method: GET</li>
+            <li>query params (all required):<ul class="list-disc list-inside indent-8">
+                    <li>year</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="getBook" class="block ring-4 rounded-md ring-slate-700 bg-slate-200 py-2 px-2 m-5 max-w-xl font-mono">
+        <h2 class="text-2xl font-bold my-1.5 text-center">/getBook</h3>
+            <ul class="list-disc list-inside indent-4">
+                <li>method: GET</li>
+                <li>query params (all required):<ul class="list-disc list-inside indent-8">
+                        <li>author</li>
+                        <li>title</li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+
+</body>
+
+</html>
