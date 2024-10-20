@@ -6,7 +6,7 @@ const handleResponse = async (response) => {
         content.innerHTML = `${obj.message}`;
     }
     else {
-
+        content.innerHTML = `${JSON.stringify(obj)}`;
     }
 };
 
