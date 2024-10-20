@@ -5,16 +5,13 @@ const handleResponse = async (response) => {
     if (obj.message) {
         content.innerHTML = `${obj.message}`;
     }
-    /*
-    if (obj.users) {
-        console.log(obj.users);
-        content.innerHTML = `${JSON.stringify(obj.users)}`;
+    else {
+
     }
-    */
 };
 
 const sendReq = async (bookForm) => {
-    const action = bookForm.getAttribute('action');
+    let action = bookForm.getAttribute('action');
     const method = bookForm.getAttribute('method');
 
     const formObject = {
@@ -46,15 +43,15 @@ const sendReq = async (bookForm) => {
     }
     else {
 
-        for (obj in formObject){
-            if(formObject[obj].value)
-            {
-
+        let queryParams = "?"
+        for (obj in formObject) {
+            if (formObject[obj]) {
+                queryParams += `${obj}=${formObject[obj].value}&`;
             }
         }
+        queryParams = queryParams.slice(0, queryParams.length - 1);
+        action += queryParams;
     }
-
-    console.log(req);
 
     const response = await fetch(action, req);
     handleResponse(response);
@@ -84,6 +81,30 @@ const init = () => {
         return false;
     };
     getAllBooks.addEventListener('submit', processgetAllBooks);
+
+    const getBook = document.querySelector('#getBook');
+    const processgetBook = (e) => {
+        e.preventDefault();
+        sendReq(getBook);
+        return false;
+    };
+    getBook.addEventListener('submit', processgetBook);
+
+    const getBooksByAuthor = document.querySelector('#getBooksByAuthor');
+    const processgetBooksByAuthor = (e) => {
+        e.preventDefault();
+        sendReq(getBooksByAuthor);
+        return false;
+    };
+    getBooksByAuthor.addEventListener('submit', processgetBooksByAuthor);
+
+    const getBooksByYear = document.querySelector('#getBooksByYear');
+    const processgetBooksByYear = (e) => {
+        e.preventDefault();
+        sendReq(getBooksByYear);
+        return false;
+    };
+    getBooksByYear.addEventListener('submit', processgetBooksByYear);
 
     /*
     const bookForm = document.querySelector('#bookForm');

@@ -142,7 +142,7 @@ const addBook = (request, response) => {
   }
 
   if (status === 201) {
-    responseJSON.message = 'User Created Successfully!';
+    responseJSON.message = 'Book Created Successfully!';
     return respond(request, response, JSON.stringify(responseJSON), status);
   }
 
