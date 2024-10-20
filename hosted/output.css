@@ -554,8 +554,16 @@ video {
   display: none;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
+}
+
+.sticky {
+  position: sticky;
 }
 
 .right-5 {
